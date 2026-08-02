@@ -1,3 +1,4 @@
+import type { KeyBinding } from "@opentui/core";
 import { StatusBar } from "./status-bar";
 
 type Props = {
@@ -5,11 +6,20 @@ type Props = {
     disabled?: boolean;
 };
 
+// Key bindings for the textarea component
+export const TEXTAREA_KEY_BINDINGS: KeyBinding[] = [
+    { name: "return", action: "submit" },
+    { name: "enter", action: "submit" },
+    { name: "return", shift: true, action: "newline" },
+    { name: "enter", shift: true, action: "newline" },
+]
+
 export function InputBar({ onSubmit, disabled }: Props) {
     return (
         <box width="100%" alignItems="center" justifyContent="center">
             <box
-                border = {["left"]}
+                width="100%"
+                border={["left"]}
                 borderColor={"cyan"}
             >
                 <box
@@ -22,10 +32,12 @@ export function InputBar({ onSubmit, disabled }: Props) {
                     gap={1}
                 >
                     <textarea
-                        focused = {!disabled}
+                        width="100%"
+                        focused={!disabled}
+                        keyBindings={TEXTAREA_KEY_BINDINGS}
                         placeholder={`Ask anything... "Fix a bug in the database"`}
                     />
-                    <StatusBar/>
+                    <StatusBar />
                 </box>
             </box>
         </box>

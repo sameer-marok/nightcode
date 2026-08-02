@@ -14,8 +14,8 @@ function App() {
       backgroundColor="#0D0D12" 
       flexDirection="column">
       <Header />
-      <box width="100%" maxWidth={78} paddingX = {2}>
-        <InputBar onSubmit={() => {}}/>
+      <box width="100%" paddingX={2} maxWidth={80}>
+        <InputBar onSubmit={() => {}} />
       </box>
     </box>
   );

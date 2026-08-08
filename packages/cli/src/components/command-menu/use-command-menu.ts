@@ -67,10 +67,11 @@ export function useCommandMenu(): UseCommandMenuReturn {
         } else if (key.name === "up") {
             key.preventDefault();
             setSelectedIndex((i: number) => { // calculating new index
-                const newIndex = Math.max(0, i-1)
+                if (filteredCommands.length === 0) return 0;
+                const newIndex = i === 0 ? filteredCommands.length - 1 : i - 1;
                 // keep highlighted item visible when arrowing past the edge
                 const sb = scrollRef.current;
-                if (sb && newIndex < sb.scrollTop) {
+                if (sb && (i === 0 || newIndex < sb.scrollTop)) {
                     sb.scrollTo(newIndex);
                 }
                 return newIndex;
@@ -79,12 +80,14 @@ export function useCommandMenu(): UseCommandMenuReturn {
             key.preventDefault();
             setSelectedIndex((i: number) => { // calculating new index
                 if (filteredCommands.length === 0) return 0;
-                const newIndex = Math.min(filteredCommands.length - 1, i + 1);
+                const newIndex = i === filteredCommands.length - 1 ? 0 : i + 1;
                 const sb = scrollRef.current;
                 if (sb) {
                     const viewportHeight = sb.viewport.height;
                     const visibleEnd = sb.scrollTop + viewportHeight - 1;
-                    if (newIndex > visibleEnd) {
+                    if (i === filteredCommands.length - 1) {
+                        sb.scrollTo(0);
+                    } else if (newIndex > visibleEnd) {
                         sb.scrollTo(newIndex - viewportHeight + 1);
                     }
                 }

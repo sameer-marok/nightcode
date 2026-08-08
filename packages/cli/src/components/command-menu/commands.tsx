@@ -14,4 +14,19 @@ export const COMMANDS : Command[] = [
             ctx.exit();
         },
     },
+    {
+        name: "new2",
+        description: "Start a new conversation",
+        value: "/new2",
+    },
+    {
+        name: "new3",
+        description: "Start a new conversation",
+        value: "/new3",
+    },
+    {
+        name: "new4",
+        description: "Start a new conversation",
+        value: "/new4",
+    },
 ];

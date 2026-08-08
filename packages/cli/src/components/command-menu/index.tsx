@@ -57,13 +57,13 @@ export function CommandMenu({
                         onMouseMove={() => onSelect(i)}
                         onMouseDown={() => onExecute(i)}
                     >   
-                        // Command name text
+                        {/* Command name text */}
                         <box width={COMMAND_NAME_WIDTH} flexShrink={0}>
                             <text selectable={false} fg={isSelected ? "black" : "white"}>
                                 /{cmd.name}
                             </text>
                         </box>
-                        // Description text
+                        {/* Description text */}
                         <box flexGrow={1} flexShrink={1} overflow="hidden">
                             <text selectable={false} fg={isSelected ? "black" : "gray"}>
                                 /{cmd.description}

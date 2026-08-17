@@ -102,7 +102,7 @@ export function InputBar({ onSubmit, disabled }: Props) {
     const handleCommandExecute = useCallback((index: number) => {
         const command = resolveCommand(index);
         handleCommand(command);
-    }, [])
+    }, [resolveCommand, handleCommand]);
 
     return (
         <box width="100%" alignItems="center" justifyContent="center">

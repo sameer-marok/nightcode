@@ -6,6 +6,7 @@ import { StatusBar } from "./status-bar";
 import { CommandMenu } from "./command-menu";
 import type { Command } from "./command-menu/types";
 import { useCommandMenu } from "./command-menu/use-command-menu";
+import { useToast } from "../providers/toast";
 
 type Props = {
     onSubmit: (input: string) => void;
@@ -24,6 +25,8 @@ export function InputBar({ onSubmit, disabled }: Props) {
     const renderer = useRenderer();
     const textareaRef = useRef<TextareaRenderable>(null);
     const onSubmitRef = useRef<() => void>(() => {});
+    // Access the toast context to show notifications
+    const toast = useToast();
 
     const {
         showCommandMenu,
@@ -56,12 +59,13 @@ export function InputBar({ onSubmit, disabled }: Props) {
 
         if (command.action) {
             command.action({
-                exit: () => renderer.destroy()
+                exit: () => renderer.destroy(),
+                toast // Pass the toast context to the command action
             });
         } else {
             textarea.insertText(command.value + " ");
         }
-    }, [renderer]);
+    }, [renderer, toast]);
 
     // Handle the submission of the input text
     const handleSubmit = useCallback(() => {

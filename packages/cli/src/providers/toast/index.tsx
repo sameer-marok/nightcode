@@ -12,7 +12,7 @@ import { type ToastOptions, type ToastVariant, DEFAULT_DURATION } from "./types"
 // ToastContext provides a context for managing toast notifications.
 export type ToastContextValue = {
     show: (options: ToastOptions) => void;
-}
+};
 
 // Create a context for the toast notifications
 const ToastContext = createContext<ToastContextValue | null>(null);
@@ -64,7 +64,7 @@ export function ToastProvider({ children }: ToastProviderProps) {
             setCurrentToast(null)
         }, duration).unref()
     }, [clearCurrentTimeout])
-    
+
     // Create a value object to be provided to the ToastContext
     const value: ToastContextValue = {
         show
@@ -84,6 +84,7 @@ type ToastProps = {
 
 function Toast({ currentToast }: ToastProps) {
     const { width } = useTerminalDimensions()
+    const toastWidth = Math.max(1, Math.min(60, width - 6))
 
     if (!currentToast) {
         return null
@@ -103,8 +104,8 @@ function Toast({ currentToast }: ToastProps) {
             justifyContent="center"
             alignItems="flex-start"
             top={2}
-            right={2}
-            width={Math.max(1, Math.min(60, width - 6))}
+            left={Math.max(0, Math.floor((width - toastWidth) / 2))}
+            width={toastWidth}
             paddingLeft={2}
             paddingRight={2}
             paddingTop={1}

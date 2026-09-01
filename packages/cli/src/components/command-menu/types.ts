@@ -1,6 +1,9 @@
+import type { ToastContextValue } from "../../providers/toast";
+
 // Type definitions for command-related functionality
 export type CommandContext = {
     exit: () => void;
+    toast: ToastContextValue;
 };
 
 // Type definition for a command
